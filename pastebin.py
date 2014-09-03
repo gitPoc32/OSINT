@@ -1,7 +1,5 @@
 #! /usr/bin/env python
 
-
-# 
 # Copyright (c) 2011 Xavier Garcia
 # All rights reserved.
 # 
@@ -28,6 +26,14 @@
 # CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE)
 # ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
 # POSSIBILITY OF SUCH DAMAGE.
+
+# In 03/09/2014 we modify the code, because the code of the URL http://pastebin.com/archive change:
+# <tr>
+# <td><img src="/i/t.gif" class="i_p0" alt="" border="0"><a href="/fqne9vnG">emiir2</a></td>
+#	<td>5 min ago</td>
+#	<td align="right"><a href="/archive/text">None</a></td>
+# </tr>
+			
 
 import urllib
 import re
@@ -63,7 +69,9 @@ def fetch_regexp(file):
 def list_pastes():
 	try:
 		f = urllib.urlopen('http://pastebin.com/archive')
-		result=re.findall('<td class="icon"><a href="/(\w+)">.+</a></td>', f.read())
+		# <td><img src="/i/t.gif" class="i_p0" alt="" border="0"><a href="/fqne9vnG">emiir2</a></td>
+		# result=re.findall('<td class="icon"><a href="/(\w+)">.+</a></td>', f.read())
+		result=re.findall('<td><img src="/i/t.gif" class="i_p0" alt="" border="0"><a href="/(\w+)">.+</a></td>', f.read())
 		f.close()
 		return result
 	except IOError:
