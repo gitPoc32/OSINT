@@ -34,6 +34,9 @@
 #	<td align="right"><a href="/archive/text">None</a></td>
 # </tr>
 			
+# accesso por TOR. Creo que pueden existir problemas por que en algunos casos Pastebin bloquea accesos via TOR
+import socks
+import socket
 
 import urllib
 import re
@@ -43,7 +46,10 @@ import sys
 import signal
 import os
 
+socks.setdefaultproxy(socks.PROXY_TYPE_SOCKS5, "127.0.0.1", 9050) 
+socket.socket = socks.socksocket  
 
+import urllib2 
 
 regular_expressions=[]
 seen_pasties=[]
